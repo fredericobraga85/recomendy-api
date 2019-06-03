@@ -4,7 +4,11 @@
     "module": "commonjs",
     "lib": ["es2017"],
     "outDir": "dist",
-    "typeRoots": ["./node_modules/@types"]
+    "typeRoots": ["./node_modules/@types"],
+    "noEmitOnError": true,
+    "pretty": true
   },
-  "exclude": ["dist"]
+  "compileOnSave": true,
+  "exclude": ["dist"],
+  "include": ["src/**/*"]
 }
