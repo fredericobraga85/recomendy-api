@@ -8,17 +8,18 @@ export class Apollo {
   constructor(port = 4000) {
     const app = express()
 
-    const queryList: [Service] = [new HelloWorld()]
-    const mutationList: [Service] = [new Authenticate()]
+    const queryList: Service[] = [new HelloWorld()]
+    const mutationList: Service[] = [new Authenticate()]
 
     const typeDefs = gql`
       type Query {
-        ${queryList.map(service => service.title + ': String').join()}
+         ${queryList.map(service => service.action).join()}
       }
       type Mutation {
-        ${mutationList.map(service => service.title + ': String').join()}
+        ${mutationList.map(service => service.action).join()}
       }
     `
+
     const resolvers = {
       Query: {},
       Mutation: {}

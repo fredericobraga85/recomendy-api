@@ -1,8 +1,7 @@
 import { Service } from '../Service'
-import { resolve } from 'url'
 
-export class Authenticate extends Service {
-  constructor() {
-    super('authenticate', () => 'testing', () => 'Here is your token 22eeeqq')
-  }
+export class Authenticate implements Service {
+  title = 'authenticate'
+  action = 'authenticate: String'
+  resolver = () => 'Here is your token 22eeeqq'
 }
