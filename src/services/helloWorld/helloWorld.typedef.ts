@@ -4,8 +4,8 @@ export const HELLOWORLD_TYPEDEF = `
     message: String
     response: String
   }
+`
 
-  type Query {
+export const HELLOWORLD_QUERY = `
     helloWorld(name:String): HelloWorldResponse
-  }
 `

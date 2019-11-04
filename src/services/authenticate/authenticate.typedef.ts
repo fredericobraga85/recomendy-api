@@ -5,8 +5,7 @@ export const AUTHENTICATE_TYPEDEF = `
     user: User
     token: String
   }
-
-  type Mutation {
+`
+export const AUTHENTICATE_MUTATION = `
     authenticate (email: String!, pwd: String!): AuthenticateResponse
-  }
 `

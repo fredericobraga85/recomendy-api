@@ -1,13 +1,5 @@
-import { HelloWorldResponse } from './HelloWorldResponse'
+import { helloWorld } from './HelloWorldUseCase'
 
-export const helloWorldResolver = {
-  Query: {
-    helloWorld: (_, { name }): HelloWorldResponse => {
-      return {
-        success: true,
-        message: `you did it ${name}`,
-        response: 'Hello World 123!'
-      }
-    }
-  }
+export const helloWorldResolver = (_, { name }) => {
+  return helloWorld(name)
 }
