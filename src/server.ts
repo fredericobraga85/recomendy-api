@@ -1,10 +1,11 @@
-import * as express from 'express'
-import { ApolloServer } from 'apollo-server-express'
-import { APP_TYPEDEF as typeDefs } from './services/app.typedef'
+import express from 'express'
+import { ApolloServer, gql } from 'apollo-server-express'
+import { APP_TYPEDEF } from './services/app.typedef'
 import { APP_RESOLVERS as resolvers } from './services/app.resolvers'
 
 const PORT = 4000
 const app = express()
+const typeDefs = gql(APP_TYPEDEF)
 const server = new ApolloServer({ typeDefs, resolvers })
 server.applyMiddleware({ app })
 

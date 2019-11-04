@@ -1,4 +1,8 @@
-import * as authenticate from './authenticate/AuthenticateResolver'
+import { helloWorldResolver } from './helloWorld/HelloWorldResolver'
+import { authenticateResolver } from './authenticate/AuthenticateResolver'
 import { IResolvers } from 'graphql-tools'
 
-export const APP_RESOLVERS = [authenticate] as IResolvers[]
+export const APP_RESOLVERS = [
+  helloWorldResolver,
+  authenticateResolver
+] as IResolvers[]

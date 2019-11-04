@@ -1,7 +1,7 @@
 export const MODEL_BASE_TYPEDEF = `
-  type ModelBase {
+  interface ModelBase {
     id: ID!
-    createdAt: String!
-    updatedAt: String!
+    createdAt: String
+    updatedAt: String
   }
 `

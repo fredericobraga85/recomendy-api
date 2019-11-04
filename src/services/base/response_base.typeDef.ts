@@ -1,5 +1,5 @@
 export const RESPONSE_BASE_TYPEDEF = `
-  type ResponseBase {
+  interface ResponseBase {
     success: Boolean!
     message: String
   }

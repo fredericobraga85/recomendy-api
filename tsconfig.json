@@ -6,7 +6,9 @@
     "outDir": "dist",
     "typeRoots": ["./node_modules/@types"],
     "noEmitOnError": true,
-    "pretty": true
+    "pretty": true,
+    "esModuleInterop": true,
+    "sourceMap": true
   },
   "compileOnSave": true,
   "exclude": ["dist"],
