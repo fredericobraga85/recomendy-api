@@ -1,10 +1,10 @@
 import { ModelBase } from '../base/ModelBase'
-import { Role } from '../role/Role'
+import { ROLES } from '../../database/mock'
 
 export class User extends ModelBase {
   firstName: String
   surName: String
   email: String
   avatarUrl: String
-  roles: Role[]
+  roles: ROLES[]
 }

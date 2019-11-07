@@ -8,7 +8,15 @@ connectDatabase()
 
 const PORT = 4000
 const app = express()
-const server = new ApolloServer({ typeDefs, resolvers })
+const server = new ApolloServer({
+  typeDefs,
+  resolvers,
+  context: async ({ req }) => {
+    return {
+      token: req.headers['authorization']
+    }
+  }
+})
 server.applyMiddleware({ app })
 
 app.listen({ port: PORT }, () =>

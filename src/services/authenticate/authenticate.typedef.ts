@@ -2,7 +2,6 @@ export const AUTHENTICATE_TYPEDEF = `
   type AuthenticateResponse implements ResponseBase {
     success: Boolean!
     message: String
-    user: User
     token: String
   }
 `

@@ -8,6 +8,10 @@ import {
   AUTHENTICATE_MUTATION
 } from './authenticate/authenticate.typeDef'
 import {
+  GETMYPROFILE_TYPEDEF,
+  GETMYPROFILE_QUERY
+} from './getMyProfile/getMyProfile.typedef'
+import {
   HELLOWORLD_TYPEDEF,
   HELLOWORLD_QUERY
 } from './helloWorld/helloWorld.typedef'
@@ -18,11 +22,12 @@ const TYPES = [
   ROLE_TYPEDEF,
   RESPONSE_BASE_TYPEDEF,
   HELLOWORLD_TYPEDEF,
+  GETMYPROFILE_TYPEDEF,
   AUTHENTICATE_TYPEDEF
 ].join(' ')
 
 const QUERIES = `type Query {
-  ${[HELLOWORLD_QUERY].join(' ')}
+  ${[HELLOWORLD_QUERY, GETMYPROFILE_QUERY].join(' ')}
   }`
 
 const MUTATIONS = `type Mutation {
