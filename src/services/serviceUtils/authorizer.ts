@@ -1,5 +1,5 @@
-import { verifyToken } from '../serviceUtils/tokenizer'
 import { ROLES, USER_PERMISSION, ADMIN_PERMISSION } from '../../database/mock'
+import { RoleError } from './errors/RoleError'
 
 export const verifyRolePermission = (userRoles: any[], permission) => {
   return userRoles.some(role => {
@@ -11,7 +11,7 @@ export const verifyRolePermission = (userRoles: any[], permission) => {
         return ADMIN_PERMISSION.includes[permission]
       }
       default: {
-        return false
+        throw new RoleError()
       }
     }
   })

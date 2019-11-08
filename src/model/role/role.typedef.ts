@@ -1,6 +1,6 @@
 export const ROLE_TYPEDEF = `
-  enum Role {
-    USER
-    ADMIN
+  type Role {
+    id: ID!
+    name: String!
   }
 `

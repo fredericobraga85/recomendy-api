@@ -13,7 +13,7 @@ const server = new ApolloServer({
   resolvers,
   context: async ({ req }) => {
     return {
-      token: req.headers['authorization']
+      authToken: req.headers['authorization']
     }
   }
 })

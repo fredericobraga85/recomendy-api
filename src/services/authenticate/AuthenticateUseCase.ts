@@ -1,6 +1,8 @@
 import { AuthenticateResponse } from './AuthenticateResponse'
 import { createToken } from '../serviceUtils/tokenizer'
 import { ROLES } from '../../database/mock'
+import { AuthPayload } from '../serviceUtils/AuthPayload'
+import { Role } from '../../model/role/Role'
 
 export const authenticate = (
   email: string,
@@ -10,18 +12,16 @@ export const authenticate = (
     user: {
       id: 'myId',
       firstName: 'Fred',
-      surName: 'Braga',
+      lastName: 'Braga',
       email: email,
       avatarUrl: '',
-      roles: [ROLES.USER]
+      roles: [ROLES.ADMIN]
     }
-  }
+  } as AuthPayload
 
   const token = createToken(payload)
 
   return {
-    success: true,
-    message: `you did it`,
-    token: `this is my token: ${token}`
+    token
   }
 }

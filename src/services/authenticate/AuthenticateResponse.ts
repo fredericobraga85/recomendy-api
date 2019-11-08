@@ -1,5 +1,3 @@
-import { ResponseBase } from '../base/ResponseBase'
-
-export class AuthenticateResponse extends ResponseBase {
+export class AuthenticateResponse {
   token?: string
 }

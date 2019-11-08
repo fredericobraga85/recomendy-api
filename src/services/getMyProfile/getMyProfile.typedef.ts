@@ -1,7 +1,5 @@
 export const GETMYPROFILE_TYPEDEF = `
-  type GetMyProfileResponse implements ResponseBase {
-    success: Boolean!
-    message: String
+  type GetMyProfileResponse {
     user: User
   }
 `

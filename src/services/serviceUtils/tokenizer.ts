@@ -1,18 +1,20 @@
 import jwt from 'jsonwebtoken'
 import { AuthPayload } from './AuthPayload'
+import { ApolloError } from 'apollo-server-errors'
+import { TokenError } from './errors/TokenError'
 
 export const createToken = (payload: AuthPayload) => {
-  return jwt.sign(payload, 'my_private_key')
+  try {
+    return jwt.sign(payload, 'my_private_key')
+  } catch (e) {
+    throw new TokenError(e.message)
+  }
 }
 
-export const verifyToken = (token): AuthPayload => {
-  const rslt = jwt.verify(token, 'my_private_key')
-
-  if (rslt as object) {
-    return rslt as AuthPayload
+export const verifyToken = token => {
+  try {
+    return jwt.verify(token, 'my_private_key') as AuthPayload
+  } catch (e) {
+    throw new TokenError(e.message)
   }
-
-  const payload = new AuthPayload()
-  payload.success = false
-  payload.message = 'Error'
 }

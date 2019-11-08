@@ -1,7 +1,10 @@
 import { getMyProfile } from './GetMyProfileUseCase'
+import { ApolloError } from 'apollo-server-core'
 
-export const getMyProfileResolver = (root, {}, context) => {
-  console.log(context)
-  const token = context.token || ''
-  return getMyProfile(token)
+export const getMyProfileResolver = (_, __, context) => {
+  try {
+    return getMyProfile(context.authToken)
+  } catch (e) {
+    return new ApolloError(e.errors)
+  }
 }

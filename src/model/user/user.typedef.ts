@@ -1,12 +1,12 @@
 export const USER_TYPEDEF = `
-  type User implements ModelBase {
+  type User {
     id: ID!
+    firstName: String!
+    lastName: String!
+    email: String!
+    avatarUrl: String
+    roles: [Role]!
     createdAt: String
     updatedAt: String
-    firstName: String!
-    surName: String!
-    email: String!
-    avatarUrl: String!
-    roles: [Role]!
 }
 `
