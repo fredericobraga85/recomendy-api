@@ -15,7 +15,7 @@ export const authenticate = (
       lastName: 'Braga',
       email: email,
       avatarUrl: '',
-      roles: [ROLES.ADMIN]
+      roles: [ROLES.USER]
     }
   } as AuthPayload
 

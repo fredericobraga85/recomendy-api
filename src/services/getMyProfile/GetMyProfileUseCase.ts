@@ -1,10 +1,11 @@
 import { GetMyProfileResponse } from './GetMyProfileResponse'
-import { validateGetMyProfilePermission } from './GetMyProfileAuthorizer'
+import { validateRolePermission } from '../serviceUtils/permission'
+import { PERMISSION } from '../../database/mock'
 
-export const getMyProfile = (token): GetMyProfileResponse => {
-  const payload = validateGetMyProfilePermission(token)
+export const getMyProfile = (user): GetMyProfileResponse => {
+  validateRolePermission(user.roles, PERMISSION.GET_MY_PROFILE)
 
   return {
-    user: payload.user
+    user: user
   }
 }

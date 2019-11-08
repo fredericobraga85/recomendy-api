@@ -11,7 +11,7 @@ export const createToken = (payload: AuthPayload) => {
   }
 }
 
-export const verifyToken = token => {
+export const getPayloadFromToken = token => {
   try {
     return jwt.verify(token, 'my_private_key') as AuthPayload
   } catch (e) {
