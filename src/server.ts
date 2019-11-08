@@ -1,6 +1,6 @@
 import express from 'express'
 import { connectDatabase } from './database/MongoDB'
-import { ApolloServer } from 'apollo-server-express'
+import { ApolloServer, ApolloError } from 'apollo-server-express'
 import { APP_TYPEDEF as typeDefs } from './services/app.typedef'
 import { APP_RESOLVERS as resolvers } from './services/app.resolvers'
 import { getPayloadFromToken } from './services/serviceUtils/tokenizer'
@@ -14,7 +14,7 @@ const server = new ApolloServer({
   resolvers,
   context: async ({ req }) => {
     return {
-      payload: getPayloadFromToken(req.headers['authorization'])
+      authToken: req.headers['authorization']
     }
   }
 })

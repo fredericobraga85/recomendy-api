@@ -1,6 +1,5 @@
 import jwt from 'jsonwebtoken'
 import { AuthPayload } from './AuthPayload'
-import { ApolloError } from 'apollo-server-errors'
 import { TokenError } from './errors/TokenError'
 
 export const createToken = (payload: AuthPayload) => {
@@ -11,7 +10,7 @@ export const createToken = (payload: AuthPayload) => {
   }
 }
 
-export const getPayloadFromToken = token => {
+export const getPayloadFromToken = (token): AuthPayload => {
   try {
     return jwt.verify(token, 'my_private_key') as AuthPayload
   } catch (e) {
