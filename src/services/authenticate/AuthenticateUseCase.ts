@@ -2,12 +2,11 @@ import { AuthenticateResponse } from './AuthenticateResponse'
 import { createToken } from '../serviceUtils/tokenizer'
 import { ROLES } from '../../database/mock'
 import { AuthPayload } from '../serviceUtils/AuthPayload'
-import { Role } from '../../model/role/Role'
 
-export const authenticate = (
+export const authenticate = async (
   email: string,
   pwd: string
-): AuthenticateResponse => {
+): Promise<AuthenticateResponse> => {
   const payload = {
     user: {
       id: 'myId',

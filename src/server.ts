@@ -1,13 +1,11 @@
 import express from 'express'
-import { connectDatabase } from './database/MongoDB'
-import { ApolloServer, ApolloError } from 'apollo-server-express'
+import { connectDatabase } from './database/mongodb/MongoDB'
+import { ApolloServer } from 'apollo-server-express'
 import { APP_TYPEDEF as typeDefs } from './services/app.typedef'
 import { APP_RESOLVERS as resolvers } from './services/app.resolvers'
-import { getPayloadFromToken } from './services/serviceUtils/tokenizer'
-
-connectDatabase()
 
 const PORT = 4000
+connectDatabase()
 const app = express()
 const server = new ApolloServer({
   typeDefs,

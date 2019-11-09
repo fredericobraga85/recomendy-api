@@ -3,9 +3,13 @@ import { USER_TYPEDEF } from '../model/user/user.typedef'
 import { ROLE_TYPEDEF } from '../model/role/role.typedef'
 import { PERMISSION_TYPEDEF } from '../model/permission/permission.typedef'
 import {
+  CREATE_USER_TYPEDEF,
+  CREATE_USER_MUTATION
+} from './createUser/createUser.typedef'
+import {
   AUTHENTICATE_TYPEDEF,
   AUTHENTICATE_MUTATION
-} from './authenticate/authenticate.typeDef'
+} from './authenticate/authenticate.typedef'
 import {
   GETMYPROFILE_TYPEDEF,
   GETMYPROFILE_QUERY
@@ -16,6 +20,7 @@ const TYPES = [
   ROLE_TYPEDEF,
   PERMISSION_TYPEDEF,
   GETMYPROFILE_TYPEDEF,
+  CREATE_USER_TYPEDEF,
   AUTHENTICATE_TYPEDEF
 ].join(' ')
 
@@ -24,7 +29,7 @@ const QUERIES = `type Query {
   }`
 
 const MUTATIONS = `type Mutation {
-  ${[AUTHENTICATE_MUTATION].join(' ')}
+  ${[CREATE_USER_MUTATION, AUTHENTICATE_MUTATION].join(' ')}
   }`
 
 export const APP_TYPEDEF = gql([TYPES, QUERIES, MUTATIONS].join(' '))
