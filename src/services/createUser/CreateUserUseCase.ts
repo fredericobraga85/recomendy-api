@@ -10,3 +10,7 @@ export const createUser = async (user: User): Promise<CreateUserResponse> => {
     user: createdUser
   }
 }
+
+export function sum(a, b) {
+  return a + b
+}
