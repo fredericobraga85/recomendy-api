@@ -1,16 +1,17 @@
 {
   "compilerOptions": {
+    "allowJs": false,
     "target": "es2017",
+    "moduleResolution": "node",
+    "allowSyntheticDefaultImports": true,
     "module": "commonjs",
-    "lib": ["es2017", "dom"],
-    "outDir": "dist",
-    "typeRoots": ["./node_modules/@types"],
-    "noEmitOnError": true,
-    "pretty": true,
+    "sourceMap": false,
+    "listEmittedFiles": true,
+    "alwaysStrict": true,
     "esModuleInterop": true,
-    "sourceMap": true
+    "resolveJsonModule": true,
+    "skipLibCheck": true
   },
-  "compileOnSave": true,
-  "exclude": ["dist"],
-  "include": ["src/**/*"]
+  "include": ["lib/**/*", "bin/*", "test/**/*"],
+  "exclude": ["node_modules"]
 }
