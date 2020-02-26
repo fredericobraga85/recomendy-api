@@ -1,21 +1,50 @@
-import mongoose from 'mongoose'
+import { env } from '../../lib/env'
+import mongoose, { Mongoose } from 'mongoose'
+
+let connection: Mongoose
 
 export const connectDatabase = async () => {
-  const url = 'mongodb://localhost:27017/'
+  const url = `mongodb://${env.DB_DOMAIN}:${env.DB_PORT}/`
 
+  mongoose.connection.once('open', function() {
+    console.log(`Mongoose connected to ${env.DB_NAME} at ${url}`)
+  })
+  mongoose.connection.on('disconnected', function() {
+    console.log(`Mongoose disconnected to ${env.DB_NAME} at ${url}`)
+    connection = null
+  })
+  mongoose.connection.on('reconnected', function() {
+    console.log(`Mongoose reconnected to ${env.DB_NAME} at ${url}`)
+  })
   mongoose.connection.on(
     'error',
-    console.error.bind(console, 'connection error:')
+    console.error.bind(
+      console,
+      `Mongoose connection error in ${env.DB_NAME} at ${url}`
+    )
   )
-  mongoose.connection.once('open', function() {
-    console.log('Connected successfully to Mongo database')
-  })
-  await mongoose.connect(url, {
+  connection = await mongoose.connect(url, {
     useNewUrlParser: true,
-    dbName: 'recomendy_db',
+    dbName: env.DB_NAME,
     auth: {
-      user: 'admin',
-      password: 'admin'
+      user: env.DB_USER_NAME,
+      password: env.DB_USER_PWD
     }
   })
+
+  return isConnected()
+}
+
+export const disconnectDatabase = async () => {
+  if (connection) {
+    await connection.disconnect()
+  }
+}
+
+export const isConnected = () => {
+  if (connection) {
+    return connection.connections.length > 0
+  }
+
+  return false
 }

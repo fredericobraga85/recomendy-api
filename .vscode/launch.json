@@ -25,6 +25,7 @@
         "--colors",
         "${workspaceFolder}/test/**/*.test.ts"
       ],
+      "env": { "NODE_ENV": "TEST" },
       "console": "integratedTerminal",
       "internalConsoleOptions": "neverOpen",
       "protocol": "inspector"

@@ -20,10 +20,10 @@ export class UserDBModel implements IDataBaseModel<User> {
       firstName: model.firstName.toString(),
       lastName: model.lastName.toString(),
       email: model.email.toString(),
-      avatarUrl: 'test',
+      avatarUrl: model.avatarUrl.toString(),
       roles: [ROLES.USER],
-      createdAt: 'test',
-      updatedAt: 'test'
+      createdAt: model.createdAt,
+      updatedAt: model.updatedAt
     }
   }
 

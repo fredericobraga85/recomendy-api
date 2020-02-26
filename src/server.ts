@@ -1,10 +1,10 @@
+import { env } from './lib/env'
 import express from 'express'
 import { connectDatabase } from './database/mongodb/MongoDB'
 import { ApolloServer } from 'apollo-server-express'
 import { APP_TYPEDEF as typeDefs } from './services/app.typedef'
 import { APP_RESOLVERS as resolvers } from './services/app.resolvers'
 
-const PORT = 4000
 connectDatabase()
 const app = express()
 const server = new ApolloServer({
@@ -18,8 +18,8 @@ const server = new ApolloServer({
 })
 server.applyMiddleware({ app })
 
-app.listen({ port: PORT }, () =>
+app.listen({ port: env.APP_PORT }, () =>
   console.log(
-    `🚀 Server ready at http://localhost:${PORT}${server.graphqlPath}`
+    `🚀 Server ready at http://${env.APP_DOMAIN}:${env.APP_PORT}${server.graphqlPath}`
   )
 )
