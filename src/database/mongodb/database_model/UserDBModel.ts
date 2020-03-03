@@ -1,6 +1,6 @@
 import mongoose from 'mongoose'
 import { User } from '../../../model/user/User'
-import { IDataBaseModel } from './databaseModel'
+import { IDataBaseModel } from '../../databaseModel'
 import { ROLES } from '../../mock'
 
 export class UserDBModel implements IDataBaseModel<User> {
@@ -14,9 +14,13 @@ export class UserDBModel implements IDataBaseModel<User> {
     updatedAt: String
   })
 
+  defineModel() {
+    mongoose.model('user', this.userSchema)
+  }
+
   map(model: any): User {
     return {
-      id: model.id?.toString(),
+      id: model._id?.toString(),
       firstName: model.firstName.toString(),
       lastName: model.lastName.toString(),
       email: model.email.toString(),
@@ -28,8 +32,14 @@ export class UserDBModel implements IDataBaseModel<User> {
   }
 
   async save(user: User): Promise<User> {
-    const model = new (mongoose.model('user', this.userSchema))({ ...user })
-    const rslt = await model.save()
+    const userModel = mongoose.model('user')
+    const rslt = await new userModel({ ...user }).save()
+    return this.map(rslt)
+  }
+
+  async get(user: User): Promise<User> {
+    const userModel = mongoose.model('user')
+    const rslt = await userModel.findById(user.id).exec()
     return this.map(rslt)
   }
 }

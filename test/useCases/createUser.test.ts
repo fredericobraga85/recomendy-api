@@ -10,8 +10,8 @@ import { PermissionError } from '../../src/services/serviceUtils/errors/Permissi
 import { RoleError } from '../../src/services/serviceUtils/errors/RoleError'
 
 describe('createUser()', () => {
-  before(() => {
-    connectDatabase()
+  before(async () => {
+    await connectDatabase()
   })
 
   describe('by an ADMIN role', async () => {
@@ -109,7 +109,7 @@ describe('createUser()', () => {
     })
   })
 
-  after(() => {
-    disconnectDatabase()
+  after(async () => {
+    await disconnectDatabase()
   })
 })

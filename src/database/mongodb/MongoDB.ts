@@ -1,5 +1,6 @@
 import { env } from '../../lib/env'
 import mongoose, { Mongoose } from 'mongoose'
+import { initDatabaseModels } from '../databaseModel'
 
 let connection: Mongoose
 
@@ -8,6 +9,7 @@ export const connectDatabase = async () => {
 
   mongoose.connection.once('open', function() {
     console.log(`Mongoose connected to ${env.DB_NAME} at ${url}`)
+    initDatabaseModels()
   })
   mongoose.connection.on('disconnected', function() {
     console.log(`Mongoose disconnected to ${env.DB_NAME} at ${url}`)
@@ -16,13 +18,9 @@ export const connectDatabase = async () => {
   mongoose.connection.on('reconnected', function() {
     console.log(`Mongoose reconnected to ${env.DB_NAME} at ${url}`)
   })
-  mongoose.connection.on(
-    'error',
-    console.error.bind(
-      console,
-      `Mongoose connection error in ${env.DB_NAME} at ${url}`
-    )
-  )
+  mongoose.connection.on('error', function() {
+    ;`Mongoose connection error in ${env.DB_NAME} at ${url}`
+  })
   connection = await mongoose.connect(url, {
     useNewUrlParser: true,
     dbName: env.DB_NAME,

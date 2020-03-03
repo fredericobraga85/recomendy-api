@@ -21,7 +21,7 @@
         "-r",
         "ts-node/register",
         "--timeout",
-        "3000",
+        "3000000",
         "--colors",
         "${workspaceFolder}/test/**/*.test.ts"
       ],

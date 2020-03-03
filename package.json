@@ -6,7 +6,8 @@
   "scripts": {
     "dev": "NODE_ENV=DEV nodemon",
     "tsc": "tsc --noEmit -p tsconfig.json",
-    "test": "ts-mocha -p ./tsconfig.json test/**/*.test.ts"
+    "test": "ts-mocha -p ./tsconfig.json test/**/*.test.ts",
+    "testSingle": "ts-mocha -p ./tsconfig.json $test_file"
   },
   "repository": {
     "type": "git",

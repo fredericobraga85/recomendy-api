@@ -1,11 +1,16 @@
 import { GetMyProfileResponse } from './GetMyProfileResponse'
 import { validateRolePermission } from '../serviceUtils/permission'
+import { getDataBaseModel } from '../../database/databaseModel'
 import { PERMISSION } from '../../database/mock'
+import { User } from '../../model/user/User'
 
-export const getMyProfile = (user): GetMyProfileResponse => {
-  validateRolePermission(user.roles, PERMISSION.GET_MY_PROFILE)
+export const getMyProfile = async (
+  user: User
+): Promise<GetMyProfileResponse> => {
+  const model = getDataBaseModel(user)
+  const userRetrieved = await model.get(user)
 
   return {
-    user: user
+    user: userRetrieved
   }
 }
