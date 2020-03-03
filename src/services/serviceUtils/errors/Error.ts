@@ -1,7 +1,9 @@
 export abstract class Error {
-  constructor(...errors: string[]) {
-    this.errors = errors.filter(e => e)
+  constructor(message: string, details?: string) {
+    this.message = message
+    this.details = details
   }
 
-  errors: string[]
+  message: string
+  details?: string
 }
