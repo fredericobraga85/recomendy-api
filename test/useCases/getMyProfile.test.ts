@@ -26,6 +26,7 @@ describe('getMyProfile()', () => {
           lastName: 'lastName1',
           avatarUrl: 'avatarUrl1',
           email: 'email1',
+          pwd: 'password',
           roles: [ROLES.ADMIN],
           createdAt: Date(),
           updatedAt: Date()

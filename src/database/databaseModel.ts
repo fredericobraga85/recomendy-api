@@ -2,20 +2,18 @@ import { UserDBModel } from './mongodb/database_model/UserDBModel'
 import { User } from '../model/user/User'
 import { log } from '../lib/logger'
 
-let models
+export const models = {
+  userDBModel: new UserDBModel()
+}
 
 export interface IDataBaseModel<T> {
   defineModel()
-  map(model: any): T
-  save(model: T): Promise<T>
-  get(model: T): Promise<T>
+  mapOrNull(model: any): T | null
+  save(model: T): Promise<T | null>
+  getById(id: String): Promise<T | null>
 }
 
 export const initDatabaseModels = () => {
-  models = {
-    userDBModel: new UserDBModel()
-  }
-
   Object.keys(models).map(key => {
     try {
       log(`defining Model for ${key}`)
@@ -24,12 +22,4 @@ export const initDatabaseModels = () => {
       log(`Error for ${key}: ${e}`)
     }
   })
-}
-
-export const getDataBaseModel = (model): IDataBaseModel<any> => {
-  if (model as User) {
-    return models.userDBModel
-  } else {
-    throw new Error('tilt')
-  }
 }

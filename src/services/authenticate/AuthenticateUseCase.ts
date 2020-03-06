@@ -1,26 +1,28 @@
 import { AuthenticateResponse } from './AuthenticateResponse'
+import { models } from '../../database/databaseModel'
+import { User } from '../../model/user/User'
+import { AuthenticationError } from '../../services/serviceUtils/errors/AuthenticationError'
 import { createToken } from '../serviceUtils/tokenizer'
-import { ROLES } from '../../database/mock'
-import { AuthPayload } from '../serviceUtils/AuthPayload'
+import { createPayload } from '../serviceUtils/AuthPayload'
 
 export const authenticate = async (
   email: string,
   pwd: string
 ): Promise<AuthenticateResponse> => {
-  const payload = {
-    user: {
-      id: 'myId',
-      firstName: 'Fred',
-      lastName: 'Braga',
-      email: email,
-      avatarUrl: '',
-      roles: [ROLES.USER]
-    }
-  } as AuthPayload
-
+  const user = await getUserWithCredentials(email, pwd)
+  const payload = createPayload(user)
   const token = createToken(payload)
 
   return {
     token
   }
+}
+
+const getUserWithCredentials = async (email: String, pwd: String) => {
+  const user = await models.userDBModel.get(email, pwd)
+  if (user) {
+    return user
+  }
+
+  throw new AuthenticationError()
 }

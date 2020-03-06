@@ -1,6 +1,7 @@
 import jwt from 'jsonwebtoken'
 import { AuthPayload } from './AuthPayload'
 import { TokenError } from './errors/TokenError'
+import { User } from '../../model/user/User'
 
 export const createToken = (payload: AuthPayload) => {
   try {
