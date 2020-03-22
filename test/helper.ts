@@ -1,9 +1,12 @@
 import { User } from '../src/model/user/User'
+import { Session } from '../src/model/session/Session'
+import { models } from '../src/database/databaseModel'
 
 import {
   connectDatabase,
   disconnectDatabase,
-  clearDatabase
+  clearDatabase,
+  getConnection
 } from '../src/database/mongodb/MongoDB'
 
 export const getUserWithUserRole = (user?: any) => {
@@ -21,6 +24,14 @@ export const getUserWithUserRole = (user?: any) => {
 
 export const getUserWithAdminrole = (user?: any) => {
   return getUserWithUserRole({ roles: ['ADMIN'], ...user })
+}
+
+export const getSession = async (user?: any) => {
+  const createdUser = await models.userDBModel.save(user)
+
+  return {
+    user: createdUser
+  } as Session
 }
 
 export const connectTestDatabase = async () => {

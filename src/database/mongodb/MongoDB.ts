@@ -52,3 +52,7 @@ export const clearDatabase = async () => {
     await connection.connection.db.dropDatabase()
   }
 }
+
+export const getConnection = () => {
+  return connection
+}
