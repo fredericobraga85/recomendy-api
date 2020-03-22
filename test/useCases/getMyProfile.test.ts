@@ -1,40 +1,17 @@
 import { getMyProfile } from '../../src/services/getMyProfile/GetMyProfileUseCase'
 import assert from 'assert'
-import { User } from '../../src/model/user/User'
-import { ROLES } from '../../src/database/mock'
-import {
-  connectDatabase,
-  disconnectDatabase
-} from '../../src/database/mongodb/MongoDB'
 import { createUser } from '../../src/services/createUser/CreateUserUseCase'
+import { getUserWithAdminrole } from '../helper'
 
 describe('getMyProfile()', () => {
-  before(async () => {
-    await connectDatabase()
-  })
-
   describe('user with id', async () => {
     let createUserResp
 
     before(async () => {
-      createUserResp = await createUser(
-        {
-          roles: [ROLES.ADMIN]
-        } as User,
-        {
-          firstName: 'firstName1',
-          lastName: 'lastName1',
-          avatarUrl: 'avatarUrl1',
-          email: 'email1',
-          pwd: 'password',
-          roles: [ROLES.ADMIN],
-          createdAt: Date(),
-          updatedAt: Date()
-        }
-      )
+      createUserResp = await createUser(getUserWithAdminrole())
     })
 
-    it('should get his profile', async function() {
+    it('should get his profile without password and metadata fields', async function() {
       const getMyProfileResponse = await getMyProfile(createUserResp.user)
       assert.equal(
         getMyProfileResponse.user.firstName,
@@ -52,18 +29,9 @@ describe('getMyProfile()', () => {
         getMyProfileResponse.user.roles,
         createUserResp.user.roles
       )
-      assert.equal(
-        getMyProfileResponse.user.createdAt,
-        createUserResp.user.createdAt
-      )
-      assert.equal(
-        getMyProfileResponse.user.updatedAt,
-        createUserResp.user.updatedAt
-      )
+      assert.equal(getMyProfileResponse.user.pwd, undefined)
+      assert.equal(getMyProfileResponse.user.createdAt, undefined)
+      assert.equal(getMyProfileResponse.user.updatedAt, undefined)
     })
-  })
-
-  after(async () => {
-    await disconnectDatabase()
   })
 })

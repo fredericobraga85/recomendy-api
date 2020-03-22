@@ -1,10 +1,5 @@
 import assert from 'assert'
-import { User } from '../../src/model/user/User'
 import { ROLES } from '../../src/database/mock'
-import {
-  connectDatabase,
-  disconnectDatabase
-} from '../../src/database/mongodb/MongoDB'
 import { createUser } from '../../src/services/createUser/CreateUserUseCase'
 import { authenticate } from '../../src/services/authenticate/AuthenticateUseCase'
 import { createPayload } from '../../src/services/serviceUtils/AuthPayload'
@@ -12,29 +7,20 @@ import { createToken } from '../../src/services/serviceUtils/tokenizer'
 import { AuthenticationError } from '../../src/services/serviceUtils/errors/AuthenticationError'
 
 describe('authenticate()', () => {
-  before(async () => {
-    await connectDatabase()
-  })
-
   describe('for registered user', async () => {
     let createUserResp
 
     before(async () => {
-      createUserResp = await createUser(
-        {
-          roles: [ROLES.ADMIN]
-        } as User,
-        {
-          firstName: 'firstName1',
-          lastName: 'lastName1',
-          avatarUrl: 'avatarUrl1',
-          email: 'validEmail1',
-          pwd: 'validPwd1',
-          roles: [ROLES.ADMIN],
-          createdAt: Date(),
-          updatedAt: Date()
-        }
-      )
+      createUserResp = await createUser({
+        firstName: 'firstName1',
+        lastName: 'lastName1',
+        avatarUrl: 'avatarUrl1',
+        email: 'validEmail1',
+        pwd: 'validPwd1',
+        roles: [ROLES.ADMIN],
+        createdAt: Date(),
+        updatedAt: Date()
+      })
     })
 
     it('should get jwt auth token when sending valid email/pwd', async function() {
@@ -55,9 +41,5 @@ describe('authenticate()', () => {
         await authenticate('invalidEmail', 'invalidPwd')
       }, new AuthenticationError())
     })
-  })
-
-  after(async () => {
-    await disconnectDatabase()
   })
 })

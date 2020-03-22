@@ -46,3 +46,9 @@ export const isConnected = () => {
 
   return false
 }
+
+export const clearDatabase = async () => {
+  if (connection) {
+    await connection.connection.db.dropDatabase()
+  }
+}

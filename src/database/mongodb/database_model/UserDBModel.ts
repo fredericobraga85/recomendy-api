@@ -23,11 +23,11 @@ export class UserDBModel implements IDataBaseModel<User> {
     if (model) {
       return {
         id: model._id?.toString(),
-        firstName: model.firstName.toString(),
-        lastName: model.lastName.toString(),
-        email: model.email.toString(),
-        pwd: model.pwd.toString(),
-        avatarUrl: model.avatarUrl.toString(),
+        firstName: model.firstName?.toString(),
+        lastName: model.lastName?.toString(),
+        email: model.email?.toString(),
+        pwd: model.pwd?.toString(),
+        avatarUrl: model.avatarUrl?.toString(),
         roles: [ROLES.USER],
         createdAt: model.createdAt,
         updatedAt: model.updatedAt
@@ -43,9 +43,15 @@ export class UserDBModel implements IDataBaseModel<User> {
     return this.mapOrNull(rslt)
   }
 
-  async getById(id: String): Promise<User | null> {
+  async getById(id: String, fields?: String[]): Promise<User | null> {
     const userModel = mongoose.model('user')
-    const rslt = await userModel.findById(id).exec()
+    let rslt
+    if (fields) {
+      rslt = await userModel.findById(id, fields.join(' ')).exec()
+    } else {
+      rslt = await userModel.findById(id).exec()
+    }
+
     return this.mapOrNull(rslt)
   }
 

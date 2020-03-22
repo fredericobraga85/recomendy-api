@@ -1,6 +1,5 @@
 import { AuthenticateResponse } from './AuthenticateResponse'
 import { models } from '../../database/databaseModel'
-import { User } from '../../model/user/User'
 import { AuthenticationError } from '../../services/serviceUtils/errors/AuthenticationError'
 import { createToken } from '../serviceUtils/tokenizer'
 import { createPayload } from '../serviceUtils/AuthPayload'

@@ -1,5 +1,4 @@
 import { UserDBModel } from './mongodb/database_model/UserDBModel'
-import { User } from '../model/user/User'
 import { log } from '../lib/logger'
 
 export const models = {
@@ -10,7 +9,7 @@ export interface IDataBaseModel<T> {
   defineModel()
   mapOrNull(model: any): T | null
   save(model: T): Promise<T | null>
-  getById(id: String): Promise<T | null>
+  getById(id: String, fields?: string[]): Promise<T | null>
 }
 
 export const initDatabaseModels = () => {
