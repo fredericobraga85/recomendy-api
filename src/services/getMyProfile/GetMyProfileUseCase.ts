@@ -15,7 +15,6 @@ export const getMyProfile = async (
       'firstName',
       'lastName',
       'email',
-      'pwd',
       'avatarUrl'
     ])
   } else {

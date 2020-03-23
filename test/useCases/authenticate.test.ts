@@ -8,10 +8,10 @@ import { AuthenticationError } from '../../src/services/serviceUtils/errors/Auth
 
 describe('authenticate()', () => {
   describe('for registered user', async () => {
-    let createUserResp
+    before(async () => {})
 
-    before(async () => {
-      createUserResp = await createUser({
+    it('should get jwt auth token when sending valid email/pwd', async function() {
+      const createUserResp = await createUser({
         firstName: 'firstName1',
         lastName: 'lastName1',
         avatarUrl: 'avatarUrl1',
@@ -21,9 +21,6 @@ describe('authenticate()', () => {
         createdAt: Date(),
         updatedAt: Date()
       })
-    })
-
-    it('should get jwt auth token when sending valid email/pwd', async function() {
       const authenticateResponse = await authenticate(
         'validEmail1',
         'validPwd1'

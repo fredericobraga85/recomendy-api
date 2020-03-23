@@ -18,7 +18,7 @@ export const authenticate = async (
 }
 
 const getUserWithCredentials = async (email: String, pwd: String) => {
-  const user = await models.userDBModel.get(email, pwd)
+  const user = await models.userDBModel.getOneByFields({ email, pwd })
   if (user) {
     return user
   }

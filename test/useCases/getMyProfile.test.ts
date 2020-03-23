@@ -1,11 +1,6 @@
 import { getMyProfile } from '../../src/services/getMyProfile/GetMyProfileUseCase'
 import assert from 'assert'
-import { createUser } from '../../src/services/createUser/CreateUserUseCase'
-import {
-  getSession,
-  getUserWithAdminrole,
-  getUserWithUserRole
-} from '../helper'
+import { getSession, getUserWithAdminrole } from '../helper'
 import { UserNotFoundError } from '../../src/services/serviceUtils/errors/UserNotFoundError'
 
 describe('getMyProfile()', () => {

@@ -5,8 +5,7 @@ import { models } from '../src/database/databaseModel'
 import {
   connectDatabase,
   disconnectDatabase,
-  clearDatabase,
-  getConnection
+  clearDatabase
 } from '../src/database/mongodb/MongoDB'
 
 export const getUserWithUserRole = (user?: any) => {
@@ -14,7 +13,8 @@ export const getUserWithUserRole = (user?: any) => {
     firstName: 'firstName1',
     lastName: 'lastName1',
     avatarUrl: 'avatarUrl1',
-    email: 'email1',
+    email: `email_${Math.floor(Math.random() * 10000)}_${new Date().getTime()}`,
+    pwd: 'pwd1',
     roles: ['USER'],
     createdAt: Date(),
     updatedAt: Date(),

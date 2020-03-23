@@ -8,7 +8,7 @@ export class UserDBModel implements IDataBaseModel<User> {
     id: String,
     firstName: String,
     lastName: String,
-    email: String,
+    email: { type: String, unique: true },
     pwd: String,
     avatarUrl: String,
     createdAt: String,
@@ -55,9 +55,9 @@ export class UserDBModel implements IDataBaseModel<User> {
     return this.mapOrNull(rslt)
   }
 
-  async get(email: String, pwd: String): Promise<User | null> {
+  async getOneByFields(fields: any): Promise<User | null> {
     const userModel = mongoose.model('user')
-    const rslt = await userModel.findOne({ email, pwd }).exec()
+    const rslt = await userModel.findOne(fields).exec()
     return this.mapOrNull(rslt)
   }
 }

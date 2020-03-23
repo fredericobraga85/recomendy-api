@@ -10,6 +10,7 @@ export interface IDataBaseModel<T> {
   mapOrNull(model: any): T | null
   save(model: T): Promise<T | null>
   getById(id: String, fields?: string[]): Promise<T | null>
+  getOneByFields(fields: any): Promise<T | null>
 }
 
 export const initDatabaseModels = () => {

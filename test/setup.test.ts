@@ -8,7 +8,10 @@ before(async () => {
   await connectTestDatabase()
 })
 
-after(async () => {
+afterEach(async () => {
   await clearTestDatabase()
+})
+
+after(async () => {
   await disconnectTestDatabase()
 })
